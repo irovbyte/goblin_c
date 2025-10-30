@@ -1,6 +1,6 @@
 #include "global.h"
+#include "miner.h"
 
-#include "global.h"
 
 int hp_goblin; // определение глобальной переменной
 
@@ -11,7 +11,8 @@ int main(void)
     int player_gold = 0;
     hello(nik);
     while (1) {
-        hp_goblin = rand() % 15; // случайная жизнь гоблина от 1 до 15
+        hp_goblin = rand() % 15;
+        miner_income_tick(&player_gold);
         printf("Атака гоблина. \n(Нажми на (E)-для атаки) \n(Нажми на (R)-чтобы напугать Гоблина\n");
         printf("Жизнь Гоблина: %d\n", hp_goblin);
         int old_gold = player_gold;
@@ -20,6 +21,7 @@ int main(void)
             printf("Гоблин сбежал! Новый гоблин выходит на бой!\n");
         } else {
             printf("Ты победил гоблина! Новый гоблин выходит на бой!\n");
+            activate_miner(&player_gold);
         }
         printf("Хочешь продолжить игру? (Y - да, N - нет)\n");
         char cont;
