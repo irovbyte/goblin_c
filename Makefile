@@ -1,10 +1,13 @@
 CC = gcc
-CFLAGS = -Wall -Wextra
-SRC = goblin.c battle.c welcome.c miner.c
+CFLAGS = -std=c11 -Wall -Wextra -Iinclude
+SRC = src/battle.c src/goblin.c src/miner.c src/welcome.c src/main.c
+OBJ = $(SRC:.c=.o)
 TARGET = game
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(TARGET)
